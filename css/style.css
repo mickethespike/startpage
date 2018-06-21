@@ -1,8 +1,36 @@
 body, html {
-	margin-top: 2em;
 	background-color: #f4f4f4 !important;
+}
+
+.container {
+	margin-top: 3em !important;
 }
 
 .card {
 	margin-bottom: 1em;
+}
+
+.fa-cog {
+	display: inline !important;
+	position: absolute !important;
+	top: 10px !important;
+	right: 10px !important;
+	font-size: 24px !important;
+}
+
+.menu-btn {
+	background:none!important;
+	color:inherit;
+	border:none;
+	padding:0!important;
+	font: inherit;
+}
+
+.setting > * {
+	display: inline;
+}
+
+.setting > .toggle {
+	position: absolute;
+	right: 10px;
 }

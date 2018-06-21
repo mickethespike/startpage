@@ -1,0 +1,12 @@
+html, body, .container {
+  background-color: #131314 !important;
+  color: #ffffff;
+}
+
+.close {
+  color: #ffffff !important;
+}
+
+.card, .modal-content {
+  background-color: #39393a !important;
+}
