@@ -7,6 +7,7 @@ html, body, .container {
   color: #ffffff !important;
 }
 
-.card, .modal-content {
+.card, .modal-content, .form-control, .input-group-append {
   background-color: #39393a !important;
+  border-color: #39393a !important;
 }
