@@ -2,8 +2,8 @@ $(() => {
   mode();
 
   $('#toggle-mode').bootstrapToggle({
-    on: 'Light',
-    off: 'Dark'
+    on: 'Dark',
+    off: 'Light'
   });
 
   $('#toggle-mode').change(() => {
