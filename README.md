@@ -11,6 +11,6 @@ if you feel that something could be very useful to the other people using this t
 
 ## todo
 - [x] theme switcher
-- [ ] card adder
+- [x] card adder
 - [ ] background changer
 - [ ] ui tweaks

@@ -1,43 +1,54 @@
-/* CARD BOILERPLATE
-<div class="col-sm-6" id="name_of_card">
-  <div class="card">
-	  <div class="card-body">
-    	<h5 class="card-title">Title</h5>
-    	<p class="card-text">Bluh</p>
-    	<a href="#" class="btn btn-primary">Button</a>
-    </div>
-  </div>
-</div>
-*/
+let cards = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : []; //Check if there's an item called data, if it does'n't exist then it'll return an empty array
 
-let amount_of_cards = 0;
+const add_cards = () => {
+	let data = {};
+	data['card_title'] = document.getElementById('card_title').value;
+	data['description'] = document.getElementById('description').value;
+	data['url']	= document.getElementById('url').value;
+	data['button_label'] = document.getElementById('button_label').value;
 
-const initialize_cards = () => {
-
-}
-
-const add_to_storage = (keyName, keyValue) => {
-  localStorage.setItem(keyName, JSON.stringify(keyValue));
-}
-
-const add_card = () => {
-  let card_title = document.getElementById('card_title').value;
-  let description = document.getElementById('description').value;
-  let url = document.getElementById('url').value;
-  let button_label = document.getElementById('button_label').value;
-
-  let properties = [card_title, description, url, button_label];
-
-  add_to_storage(`card${amount_of_cards}`, properties);
-
-  document.getElementsByClassName('row')[1].innerHTML += `
+  let html = `
   <div class="col-sm-6">
 		<div class="card">
 			<div class="card-body">
-				<h5 class="card-title">${card_title}</h5>
-				<p class="card-text">${description}</p>
-				<a href="${url}" class="btn btn-primary">${button_label}</a>
+				<h5 class="card-title">${data['card_title']}</h5>
+				<p class="card-text">${data['description']}</p>
+				<a href="${data['url']}" class="btn btn-primary">${data['button_label']}</a>
 			</div>
 		</div>
-	</div>`
+	</div>`;
+
+	cards.push(data);
+	store_array('data', cards);
+	document.getElementsByClassName('row')[1].innerHTML += html;
 }
+
+const store_array = (keyname, arr) => {
+  localStorage.setItem(keyname, JSON.stringify(arr));
+}
+
+store_array('data', cards);
+
+const load_data = () => {
+  let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : []; //here I set data to the saved array, if there wasn't saved data then it'll return an empty array
+  //console.log(Boolean(localStorage.getItem('data')));
+  for(let i = 0; i < data.length;i++) { //loop into that array
+    let keys = Object.keys(data[i]); //Not important but would help you if you added more info
+
+	let html = `
+  <div class="col-sm-6">
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title">${data[i]['card_title']}</h5>
+				<p class="card-text">${data[i]['description']}</p>
+				<a href="${data[i]['url']}" class="btn btn-primary">${data[i]['button_label']}</a>
+			</div>
+		</div>
+	</div>`;
+  document.getElementsByClassName('row')[1].innerHTML += html;
+  }
+	//let handler = {'cards_title':'','description':'','url':'','button_label':''};
+
+}
+
+load_data();

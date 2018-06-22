@@ -15,11 +15,7 @@
 		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 	</head>
 	<body>
-		<script src="./js/handle_search.js"></script>
-		<script src="./js/mode.js"></script>
-		<script src="./js/add_card.js"></script>
-
-		<button type="button" class="menu-btn fa fa-plus" data-toggle="modal" data-target="#addModal"></button>
+				<button type="button" class="menu-btn fa fa-plus" data-toggle="modal" data-target="#addModal"></button>
 		<button type="button" class="menu-btn fa fa-cog" data-toggle="modal" data-target="#myModal"></button>
 
 		<div id="addModal" class="modal fade" role="dialog">
@@ -31,7 +27,7 @@
 		      </div>
 		      <div class="modal-body">
 						<div class="form-group">
-							<label for="card_title">Title</label>
+							<label for="title">Title</label>
 							<input type="text" class="form-control" id="card_title">
 						</div>
 						<div class="form-group">
@@ -48,7 +44,7 @@
 						</div>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default disabled" data-dismiss="modal">Coming Soon!</button>
+		        <button type="button" class="btn btn-default" onclick="add_cards()" data-dismiss="modal">Add</button>
 		      </div>
 		    </div>
   		</div>
@@ -128,5 +124,11 @@
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<script src="./js/handle_search.js"></script>
+		<script src="./js/mode.js"></script>
+		<script src="./js/add_card.js"></script>
+
 	</body>
 </html>
