@@ -2,7 +2,7 @@
 Startpage using bootstrap 5.
 ## preview
 ![Startpage photo](http://i.imgur.com/5l244Xj.png)
-**NOTE:** *the picture is a bit outdated, check out the live version instead*
+**NOTE:** *the picture is a bit outdated, check out the live version instead*<br>
 you can also look at a live version [here](https://mickethespike.github.io/startpage/)
 ## usage
 well just you know change the default page to this `index.html`.
