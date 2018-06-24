@@ -57,6 +57,11 @@ body, html {
 	display: none !important;
 }
 
-button {
- outline: none !important;
+.toggle-off {
+	left: 40% !important;
+	background-color: white;
+}
+
+.toggle-handle {
+	border: 1px;
 }
