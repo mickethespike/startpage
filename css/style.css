@@ -57,11 +57,14 @@ body, html {
 	display: none !important;
 }
 
-.toggle-off {
-	left: 40% !important;
-	background-color: white;
+.toggle-group > .toggle-on {
+	padding-right: 12px !important;
+}
+
+.toggle-group > .toggle-off {
+	padding-left: none !important;
 }
 
 .toggle-handle {
-	border: 1px;
+	display: none !important;
 }
