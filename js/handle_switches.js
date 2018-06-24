@@ -1,5 +1,6 @@
 $(() => {
   mode();
+  toggle_coffee();
 
   $('#toggle-mode').bootstrapToggle({
     on: 'Dark',
@@ -15,16 +16,16 @@ $(() => {
     mode();
   });
 
-  $('#toggle-coffee').bootstrapToggle(() => {
-    show_coffee();
+  $('#toggle-coffee').change(() => {
+    toggle_coffee();
   });
 });
 
-const show_coffee = () => {
+const toggle_coffee = () => {
   if ($('#toggle-coffee').prop('checked')) {
-	  $('#coffee-btn').innerHTML += `<script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support my coffee addiction', '#337AB7', 'R6R5FE86');kofiwidget2.draw();</script>`;
+    $('#coffee-btn').show();
   } else {
-    $('#coffee-btn').remove(1).remove(0);
+    $('#coffee-btn').hide();
   }
 }
 
