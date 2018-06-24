@@ -14,5 +14,6 @@ if you feel that something could be very useful to the other people using this t
 - [x] theme switcher
 - [x] card adder
 - [x] card remover
+- [ ] adding cards with search bars
 - [ ] background changer
 - [ ] ui tweaks
