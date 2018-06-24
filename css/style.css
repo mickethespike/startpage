@@ -56,3 +56,7 @@ body, html {
 .dropdown-toggle::after {
 	display: none !important;
 }
+
+button {
+ outline: none !important;
+}

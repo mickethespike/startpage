@@ -71,5 +71,3 @@ const delete_card = (card_id) => {
 $(document).ready(() => {
 	load_data();
 });
-
-console.log(card_amount);
