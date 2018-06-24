@@ -40,8 +40,6 @@ const load_data = () => {
   let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : []; //here I set data to the saved array, if there wasn't saved data then it'll return an empty array
   //console.log(Boolean(localStorage.getItem('data')));
   for(let i = 0; i < data.length; i++) { //loop into that array
-    let keys = Object.keys(data[i]); //Not important but would help you if you added more info
-
 		let html = `
 	  <div class="col-sm-6" id="${data[i]['card_title'].replace('.', '_').replace(' ', '_')}">
 			<div class="card">
@@ -65,6 +63,16 @@ const load_data = () => {
 }
 
 const delete_card = (card_id) => {
+	let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : []; //here I set data to the saved array, if there wasn't saved data then it'll return an empty array
+
+  for (let i = 0; i < data.length; i++) {
+		if (data[i]['card_title'].replace(' ', '_').replace('.', '_') === card_id.id) {
+			data.splice(i, 1);
+			localStorage['data'] = JSON.stringify(data);
+			data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : [];
+		}
+	}
+
 	document.getElementById(card_id.id).remove(0);
 }
 
