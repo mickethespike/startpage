@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
-		<title></title>
+		<title>Home</title>
 		<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -59,9 +59,13 @@
 		      </div>
 		      <div class="modal-body">
 		        <div class="setting">
-		        		<h5>Theme</h5>
-								<input id="toggle-mode" data-width="80" data-height="40" class="toggle" type="checkbox">
+		        	<h5>Theme</h5>
+							<input id="toggle-mode" data-width="80" data-height="40" class="toggle" type="checkbox">
 		        </div>
+						<div class="setting">
+							<h5>Donation Button</h5>
+							<input id="toggle-coffee" data-width="80" data-height="40" class="toggle" type="checkbox">
+						</div>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -117,9 +121,9 @@
 			</div>
 		</div>
 
-		<div style="position: fixed; bottom: 10px; right: 5px;"><script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support my coffee addiction', '#337AB7', 'R6R5FE86');kofiwidget2.draw();</script></div>
+		<div id="coffee-btn" style="position: fixed; bottom: 10px; right: 5px;"><script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support my coffee addiction', '#337AB7', 'R6R5FE86');kofiwidget2.draw();</script></div>
 		<script src="./js/handle_search.js"></script>
-		<script src="./js/mode.js"></script>
+		<script src="./js/handle_switches.js"></script>
 		<script src="./js/handle_cards.js"></script>
 
 	</body>
