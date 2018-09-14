@@ -76,8 +76,8 @@
 
 		<div class="container">
 			<div class="input-group mb-3">
-				<input type="text" class="form-control" id="searchbar" placeholder="Search DuckDuckGo" aria-label="Search DuckDuckGo" aria-describedby="basic-addon2" autofocus>
-				<div class="input-group-append" style="background-color: white;" onclick="search('ddg');">
+				<input type="text" class="form-control" id="searchbar" placeholder="Search DuckDuckGo" aria-label="Search DuckDuckGo" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event, queryDuckduckgo)" autofocus>
+				<div class="input-group-append" style="background-color: white;" onclick="queryDuckduckgo(buttonToInputValue(this))">
 					<button class="btn btn-outline-secondary" type="button">Search</button>
 				</div>
 			</div>
@@ -88,8 +88,8 @@
 						<div class="card-body">
 							<h5 class="card-title">YouTube</h5>
 							<div class="input-group mb-3">
-								<input type="text" class="form-control" id="searchyoutube" placeholder="Search YouTube" aria-label="Search YouTube" aria-describedby="basic-addon2">
-								<div class="input-group-append" onclick="search('yt');">
+								<input type="text" class="form-control" id="searchyoutube" placeholder="Search YouTube" aria-label="Search YouTube" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event, queryYoutube)">
+								<div class="input-group-append" onclick="queryYoutube(buttonToInputValue(this))">
 									<button class="btn btn-outline-secondary" type="button">Search</button>
 								</div>
 							</div>
@@ -105,8 +105,8 @@
 						<div class="card-body">
 							<h5 class="card-title">GitHub</h5>
 							<div class="input-group mb-3">
-								<input type="text" class="form-control" id="searchgithub" placeholder="Search GitHub" aria-label="Search GitHub" aria-describedby="basic-addon2">
-								<div class="input-group-append" onclick="search('gh');">
+								<input type="text" class="form-control" id="searchgithub" placeholder="Search GitHub" aria-label="Search GitHub" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event, queryGithub)">
+								<div class="input-group-append" onclick="queryGithub(buttonToInputValue(this))">
 									<button class="btn btn-outline-secondary" type="button">Search</button>
 								</div>
 							</div>
