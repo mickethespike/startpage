@@ -13,8 +13,8 @@
     <link href="./css/slidertoggle.css" rel="stylesheet">
 </head>
 	<body>
-		<button type="button" class="menu-btn fa fa-plus" data-toggle="modal" data-target="#addModal"></button>
-		<button type="button" class="menu-btn fa fa-cog" data-toggle="modal" data-target="#myModal"></button>
+		<button type="button" class="menu-btn fa fa-plus" data-toggle="modal" data-target="#addModal" tabindex="-1"></button>
+		<button type="button" class="menu-btn fa fa-cog" data-toggle="modal" data-target="#myModal" tabindex="-1"></button>
 
 		<div id="addModal" class="modal fade" role="dialog">
 		    <div class="modal-dialog">
@@ -83,7 +83,7 @@
         <div class="input-group mb-3">
 			<input type="text" class="form-control" id="searchbar" placeholder="Search DuckDuckGo" aria-label="Search DuckDuckGo" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event, queryDuckduckgo)" autofocus>
 			<div class="input-group-append" style="background-color: white;" onclick="queryDuckduckgo(buttonToInputValue(this))">
-				<button class="btn btn-outline-secondary" type="button">Search</button>
+				<button class="btn btn-outline-secondary" tabIndex="-1" type="button">Search</button>
 			</div>
 		</div>
 
@@ -95,11 +95,11 @@
 						<div class="input-group mb-3">
 							<input type="text" class="form-control" id="searchyoutube" placeholder="Search YouTube" aria-label="Search YouTube" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event, queryYoutube)">
 							<div class="input-group-append" onclick="queryYoutube(buttonToInputValue(this))">
-								<button class="btn btn-outline-secondary" type="button">Search</button>
+								<button class="btn btn-outline-secondary" tabIndex="-1" type="button">Search</button>
 							</div>
 						</div>
                         <p class="card-text">The biggest video sharing platform!</p>
-						<a href="https://youtube.com" class="btn btn-primary">Get me there!</a>
+						<a href="https://youtube.com" tabIndex="-1" class="btn btn-primary">Get me there!</a>
 					</div>
 				</div>
 			</div>
@@ -111,11 +111,11 @@
 						<div class="input-group mb-3">
 							<input type="text" class="form-control" id="searchgithub" placeholder="Search GitHub" aria-label="Search GitHub" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event, queryGithub)">
 							<div class="input-group-append" onclick="queryGithub(buttonToInputValue(this))">
-								<button class="btn btn-outline-secondary" type="button">Search</button>
+								<button class="btn btn-outline-secondary" tabIndex="-1" type="button">Search</button>
 							</div>
 						</div>
                         <p class="card-text">The most awesome code sharing platform for lovers of open source.</p>
-						<a href="https://github.com" class="btn btn-primary">Sounds awesome!</a>
+						<a href="https://github.com" tabindex="-1" class="btn btn-primary">Sounds awesome!</a>
 					</div>
 				</div>
 			</div>
