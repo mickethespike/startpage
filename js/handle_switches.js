@@ -1,39 +1,34 @@
-$(() => {
-  mode();
-  toggle_coffee();
-
-  $('#toggle-mode').bootstrapToggle({
-    on: 'Dark',
-    off: 'Light'
-  });
-
-  $('#toggle-coffee').bootstrapToggle({
-    on: 'Hide',
-    off: 'Show'
-  });
-
-  $('#toggle-mode').change(() => {
-    mode();
-  });
-
-  $('#toggle-coffee').change(() => {
-    toggle_coffee();
-  });
-});
-
-const toggle_coffee = () => {
-  if ($('#toggle-coffee').prop('checked')) {
-    $('#coffee-btn').show();
-  } else {
-    $('#coffee-btn').hide();
-  }
+/*
+function toggle_coffee() {
+    ('#toggle-coffee')
 }
 
-const mode = () => {
-  // if light mode == true
-  if ($('#toggle-mode').prop('checked')) {
-    $('link[href="./css/light.css"]').attr('href','./css/dark.css');
-  } else {
-    $('link[href="./css/dark.css"]').attr('href','./css/light.css');
-  }
+function toggle_theme() {
+    ('#toggle-mode')
+}
+*/
+
+const colorStyleLink = document.querySelector('link[href="./css/light.css"]');
+const donationWidget = document.getElementById('coffee-btn');
+const themeSlider = document.getElementById('theme-input');
+const donationSlider = document.getElementById('donation-input');
+let isCurrentlyDark = false;
+
+function setTheme(isDark) {
+    if (isCurrentlyDark != isDark) {
+        if (isDark) {
+            colorStyleLink.setAttribute('href', './css/dark.css');
+        } else {
+            colorStyleLink.setAttribute('href', './css/light.css');
+        }
+        isCurrentlyDark = isDark;
+    }
+}
+
+function setDonationVisible(isVisible) {
+    if (isVisible) {
+        donationWidget.style.display = 'block';
+    } else {
+        donationWidget.style.display = 'none';
+    }
 }
