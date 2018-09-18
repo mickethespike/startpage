@@ -17,7 +17,7 @@ html, body, .container {
     border-color: #aaaada !important;
 }
 
-.form-control:focus {
+.form-control, .form-control:focus {
     color: #bbbbfa;
 }
 
