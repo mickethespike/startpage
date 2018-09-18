@@ -9,5 +9,20 @@ html, body, .container {
 
 .card, .modal-content, .form-control, .input-group-append {
   background-color: #39393a !important;
-  border-color: #39393a !important;
+  border-color: #667777 !important;
 }
+
+.btn-outline-secondary {
+    color: #babaca;
+    border-color: #aaaada !important;
+}
+
+.form-control:focus {
+    color: #bbbbfa;
+}
+
+.form-control::placeholder {
+    color: #848a8f;
+    opacity: 1; /* Firefox */
+}
+
