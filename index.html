@@ -84,9 +84,9 @@
 	</div>
 
 	<div class="container">
-        <div class="input-group mb-3">
-			<input type="text" class="form-control" id="searchbar" placeholder="Search DuckDuckGo" aria-label="Search DuckDuckGo" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event, queryDuckduckgo)" autofocus>
-			<div class="input-group-append" style="background-color: white;" onclick="queryDuckduckgo(buttonToInputValue(this))">
+        <div class="input-group mb-3" searchbase="https://duckduckgo.com/&q=">
+			<input type="text" class="form-control" id="searchbar" placeholder="Search DuckDuckGo" aria-label="Search DuckDuckGo" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event)" autofocus>
+			<div class="input-group-append" style="background-color: white;" onclick="buttonQuerySite(this)">
 				<button class="btn btn-outline-secondary" tabIndex="-1" type="button">Search</button>
 			</div>
 		</div>
@@ -96,9 +96,9 @@
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">YouTube</h5>
-						<div class="input-group mb-3">
-							<input type="text" class="form-control" id="searchyoutube" placeholder="Search YouTube" aria-label="Search YouTube" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event, queryYoutube)">
-							<div class="input-group-append" onclick="queryYoutube(buttonToInputValue(this))">
+						<div class="input-group mb-3" searchbase="https://www.youtube.com/results?search_query=">
+							<input type="text" class="form-control" id="searchyoutube" placeholder="Search YouTube" aria-label="Search YouTube" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event)">
+							<div class="input-group-append" onclick="buttonQuerySite(this)">
 								<button class="btn btn-outline-secondary" tabIndex="-1" type="button">Search</button>
 							</div>
 						</div>
@@ -112,9 +112,9 @@
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">GitHub</h5>
-						<div class="input-group mb-3">
-							<input type="text" class="form-control" id="searchgithub" placeholder="Search GitHub" aria-label="Search GitHub" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event, queryGithub)">
-							<div class="input-group-append" onclick="queryGithub(buttonToInputValue(this))">
+						<div class="input-group mb-3" searchbase="https://github.com/search?q=">
+							<input type="text" class="form-control" id="searchgithub" placeholder="Search GitHub" aria-label="Search GitHub" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event)">
+							<div class="input-group-append" onclick="buttonQuerySite(this)">
 								<button class="btn btn-outline-secondary" tabIndex="-1" type="button">Search</button>
 							</div>
 						</div>
