@@ -3,7 +3,11 @@ let card_amount = 0;
 
 const add_cards = () => {
 	let data = {};
-	data['card_title'] = document.getElementById('card_title').value;
+	if (document.getElementById('card_title').value != "") {
+		data['card_title'] = document.getElementById('card_title').value;
+	} else {
+		return;
+	}
 	data['description'] = document.getElementById('description').value;
 	data['url']	= document.getElementById('url').value;
 	data['button_label'] = document.getElementById('button_label').value;
