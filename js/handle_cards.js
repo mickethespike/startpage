@@ -10,8 +10,14 @@ window.onload = () => {
 
 function getCardRow() {
     if (!cardRow)
-        cardRow = document.getElementsByClassName('row')[1];
+        cardRow = document.getElementById('secondaryRow');
     return cardRow;
+}
+
+function appendCard(data) {
+    const child = getCardDiv(data);
+    getCardRow().appendChild(child);
+    fadeIn(child);
 }
 
 function loadCards() {
@@ -20,7 +26,7 @@ function loadCards() {
         JSON.parse(localStorage.getItem(cardDataKey)) : [];
 
     for (let i = 0; i < items.length; i++) {
-        getCardRow().innerHTML += getHtml(items[i]);
+        appendCard(items[i]);
     }
     return items;
 }
@@ -41,7 +47,7 @@ function addCard() {
 
     cardArray.push(data);
     saveCards();
-    getCardRow().innerHTML += getHtml(data);
+    appendCard(data);
 }
 
 function deleteCard(cardID) {
@@ -49,27 +55,30 @@ function deleteCard(cardID) {
         if (cardArray[i].id === cardID) {
             cardArray.splice(i, 1);
             saveCards();
+            fadeOutAndRemove(document.getElementById(cardID));
             break;
         }
     }
-    document.getElementById(cardID).remove(0);
 }
 
-function getHtml(cardData) {
-    return `
-    <div class="col-sm-6" id="${cardData.id}">
-		<div class="card">
-			<div class="card-body">
-				<div class="dropdown">
-					<button type="button" class="dropdown-toggle card-settings fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#" onclick="deleteCard('${cardData.id}')">Delete</a>
-					</div>
-				</div>
-				<h5 class="card-title">${cardData.title}</h5>
-				<p class="card-text">${cardData.description}</p>
-				<a href="${cardData.url}" class="btn btn-primary">${cardData.buttonLabel}</a>
-			</div>
-		</div>
-	</div>`;
+function getCardDiv(cardData) {
+    const div = document.createElement('node');
+    div.className = 'col-sm-6';
+    div.id = cardData.id;
+    div.style = "opacity: 0;";
+    div.innerHTML = `
+        <div class="card">
+	       	<div class="card-body">
+	       		<div class="dropdown">
+	       			<button type="button" class="dropdown-toggle card-settings fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+	       			<div class="dropdown-menu">
+	       				<a class="dropdown-item" href="#" onclick="deleteCard('${cardData.id}')">Delete</a>
+	       			</div>
+	       		</div>
+	       		<h5 class="card-title">${cardData.title}</h5>
+	       		<p class="card-text">${cardData.description}</p>
+	       		<a href="${cardData.url}" class="btn btn-primary">${cardData.buttonLabel}</a>
+	       	</div>
+	    </div>`;
+    return div;
 }
