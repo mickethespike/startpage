@@ -35,18 +35,15 @@ function getLocalBool(key) {
     return localStorage.getItem(key) == 'true';
 }
 
-if (localStorage.getItem(useDarkThemeTag) != '') {
-    setThemeLink(getLocalBool(useDarkThemeTag));
-}
+setThemeLink(getLocalBool(useDarkThemeTag));
 
 window.onload = () => {
-    if (localStorage.getItem(useDarkThemeTag) != '') {
-        setTheme(getLocalBool(useDarkThemeTag));
-    }
-
-    if (localStorage.getItem(showDonationButtonTag) != '') {
-        setDonationVisible(getLocalBool(showDonationButtonTag));
-    } else {
+    setTheme(getLocalBool(useDarkThemeTag));
+    
+    const showDonItem = localStorage.getItem(showDonationButtonTag);
+    if (showDonItem == '' || showDonItem == null) {
         setDonationVisible(true);
+    } else {
+        setDonationVisible(getLocalBool(showDonationButtonTag));
     }
 };
