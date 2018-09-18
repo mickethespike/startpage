@@ -1,15 +1,15 @@
 html, body, .container {
-  background-color: #131314 !important;
-  color: #ffffff;
+    background-color: #131314 !important;
+    color: #ffffff;
 }
 
 .close {
-  color: #ffffff !important;
+    color: #ffffff !important;
 }
 
 .card, .modal-content, .form-control, .input-group-append {
-  background-color: #39393a !important;
-  border-color: #667777 !important;
+    background-color: #39393a !important;
+    border-color: #667777 !important;
 }
 
 .btn-outline-secondary {
@@ -25,4 +25,3 @@ html, body, .container {
     color: #848a8f;
     opacity: 1; /* Firefox */
 }
-
