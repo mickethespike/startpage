@@ -66,6 +66,12 @@ function getCardDiv(cardData) {
     div.className = 'col-sm-6';
     div.id = cardData.id;
     div.style = "opacity: 0;";
+
+    let iconUrl = cardData.url;
+    if (!iconUrl.endsWith('/'))
+        iconUrl += '/';
+    iconUrl += 'favicon.ico';
+
     div.innerHTML = `
         <div class="card">
 	       	<div class="card-body">
@@ -75,7 +81,10 @@ function getCardDiv(cardData) {
 	       				<a class="dropdown-item" href="#" onclick="deleteCard('${cardData.id}')">Delete</a>
 	       			</div>
 	       		</div>
-	       		<h5 class="card-title">${cardData.title}</h5>
+	       		<h5 class="card-title">
+                    <img class="previewIcon" src="${iconUrl}" width="24" height="24" />
+                    ${cardData.title}
+                </h5>
 	       		<p class="card-text">${cardData.description}</p>
 	       		<a href="${cardData.url}" class="btn btn-primary">${cardData.buttonLabel}</a>
 	       	</div>

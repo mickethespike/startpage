@@ -10,7 +10,7 @@
     <link href="./css/dark.css" rel="stylesheet">
     <link href="./css/slidertoggle.css" rel="stylesheet">
     <script src="./js/handle_switches.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
 </head>
@@ -85,6 +85,7 @@
 
     <div class="container">
         <div class="input-group mb-3" searchbase="https://duckduckgo.com/&q=">
+            <img class="searchEngineIcon" src="https://duckduckgo.com/favicon.ico" width="40" height="40" />
             <input type="text" class="form-control" id="searchbar" placeholder="Search DuckDuckGo" aria-label="Search DuckDuckGo" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event)" autofocus>
             <div class="input-group-append" style="background-color: white;" onclick="buttonQuerySite(this)">
                 <button class="btn btn-outline-secondary" tabIndex="-1" type="button">Search</button>
@@ -95,8 +96,11 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">YouTube</h5>
-                        <div class="input-group mb-3" searchbase="https://www.youtube.com/results?search_query=">
+                        <h5 class="card-title">
+                            <img class="previewIcon" src="./img/youtube.png" width="24" height="24"/>
+                            YouTube
+                        </h5>
+                        <div class="input-group mb-3" searchbase="https://youtube.com/results?search_query=">
                             <input type="text" class="form-control" id="searchyoutube" placeholder="Search YouTube" aria-label="Search YouTube" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event)">
                             <div class="input-group-append" onclick="buttonQuerySite(this)">
                                 <button class="btn btn-outline-secondary" tabIndex="-1" type="button">Search</button>
@@ -111,7 +115,10 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">GitHub</h5>
+                        <h5 class="card-title">
+                            <img class="previewIcon" src="https://github.com/favicon.ico" width="24" height="24"/>
+                            GitHub
+                        </h5>
                         <div class="input-group mb-3" searchbase="https://github.com/search?q=">
                             <input type="text" class="form-control" id="searchgithub" placeholder="Search GitHub" aria-label="Search GitHub" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event)">
                             <div class="input-group-append" onclick="buttonQuerySite(this)">

@@ -57,3 +57,12 @@
 .slider {
     background-color: #8f8f8f;
 }
+
+.previewIcon {
+    margin-top: -3px;
+    margin-right: 3px;
+}
+
+.searchEngineIcon {
+    margin-right: 7px;
+}
