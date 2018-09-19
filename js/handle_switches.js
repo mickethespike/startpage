@@ -8,8 +8,8 @@ function setTheme(isDark) {
     const themeSlider = document.getElementById('theme-input');
     const themeDesc = document.getElementById('theme-state-desc');
     setThemeLink(isDark);
-    themeDesc.innerHTML = isDark ? 'Dark' : 'Light';
     themeSlider.checked = isDark;
+    themeDesc.innerHTML = isDark ? 'Dark' : 'Light';
     localStorage.setItem(useDarkThemeTag, isDark);
 }
 
@@ -32,18 +32,18 @@ function setDonationVisible(isVisible) {
 }
 
 function getLocalBool(key) {
-    return localStorage.getItem(key) == 'true';
+    return localStorage.getItem(key) === 'true';
 }
 
 setThemeLink(getLocalBool(useDarkThemeTag));
 
-window.onload = () => {
+function loadSettings() {
     setTheme(getLocalBool(useDarkThemeTag));
-    
+
     const showDonItem = localStorage.getItem(showDonationButtonTag);
-    if (showDonItem == '' || showDonItem == null) {
+    if (!showDonItem || showDonItem === '') {
         setDonationVisible(true);
     } else {
         setDonationVisible(getLocalBool(showDonationButtonTag));
     }
-};
+}
