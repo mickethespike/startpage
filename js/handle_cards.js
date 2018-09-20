@@ -67,10 +67,16 @@ function getCardDiv(cardData) {
     div.id = cardData.id;
     div.style = "opacity: 0;";
 
-    let iconUrl = cardData.url;
-    if (!iconUrl.endsWith('/'))
-        iconUrl += '/';
-    iconUrl += 'favicon.ico';
+    let iconUrl;
+
+    if (cardData.customIcon) {
+        iconUrl = cardData.customIcon;
+    } else {
+        iconUrl = cardData.url;
+        if (!iconUrl.endsWith('/'))
+            iconUrl += '/';
+        iconUrl += 'favicon.ico';
+    }
 
     div.innerHTML = `
         <div class="card">
