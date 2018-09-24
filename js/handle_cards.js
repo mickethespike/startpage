@@ -72,10 +72,11 @@ function getCardDiv(cardData) {
     if (cardData.customIcon) {
         iconUrl = cardData.customIcon;
     } else {
-        iconUrl = cardData.url;
+        iconUrl = "https://" + cardData.url.split("/")[2];
         if (!iconUrl.endsWith('/'))
             iconUrl += '/';
         iconUrl += 'favicon.ico';
+		console.log(iconUrl);
     }
 
     div.innerHTML = `
