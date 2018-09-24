@@ -68,7 +68,6 @@ function getCardDiv(cardData) {
     div.style = "opacity: 0;";
 
     let iconUrl;
-
     if (cardData.customIcon) {
         iconUrl = cardData.customIcon;
     } else {
@@ -76,7 +75,6 @@ function getCardDiv(cardData) {
         if (!iconUrl.endsWith('/'))
             iconUrl += '/';
         iconUrl += 'favicon.ico';
-		console.log(iconUrl);
     }
 
     div.innerHTML = `
