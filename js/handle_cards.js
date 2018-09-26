@@ -61,6 +61,20 @@ function deleteCard(cardID) {
     }
 }
 
+function editCard(cardID) {
+  $('#editModal').modal();
+  setModalMode('Edit');
+}
+
+function setModalMode(modeName) {
+  const modal = $('#editModal')['0'];
+  modal.querySelector('.modal-title').innerHTML = `${modeName} Card`;
+  const btn = modal.querySelector('.modal-footer').querySelector('.btn');
+  btn.innerHTML = modeName;
+  btn.setAttribute('onclick', `${modeName.toLowerCase()}Card()`);
+  console.log(modeName);
+}
+
 function getCardDiv(cardData) {
     const div = document.createElement('node');
     div.className = 'col-sm-6';
@@ -83,6 +97,7 @@ function getCardDiv(cardData) {
 	       		<div class="dropdown">
 	       			<button type="button" class="dropdown-toggle card-settings fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
 	       			<div class="dropdown-menu">
+	       				<a class="dropdown-item" href="#" onclick="editCard('${cardData.id}')">Edit</a>
 	       				<a class="dropdown-item" href="#" onclick="deleteCard('${cardData.id}')">Delete</a>
 	       			</div>
 	       		</div>

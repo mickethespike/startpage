@@ -15,10 +15,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <button type="button" class="menu-btn fa fa-plus" data-toggle="modal" data-target="#addModal" tabindex="-1"></button>
+    <button type="button" class="menu-btn fa fa-plus" data-toggle="modal" onclick="setModalMode('Add')" data-target="#editModal" tabindex="-1"></button>
     <button type="button" class="menu-btn fa fa-cog" data-toggle="modal" data-target="#settingsModal" tabindex="-1"></button>
 
-    <div id="addModal" class="modal fade" role="dialog">
+    <div id="editModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" onclick="addCard()" data-dismiss="modal">Add</button>
+                    <button type="button" class="btn btn-default" onclick="addCard();" data-dismiss="modal">Add</button>
                 </div>
             </div>
         </div>
