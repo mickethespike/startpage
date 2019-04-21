@@ -1,5 +1,5 @@
 html, body, .container {
-    background-color: #131314 !important;
+    background-color: #323232  !important;
     color: #ffffff;
 }
 
@@ -8,17 +8,21 @@ html, body, .container {
 }
 
 .card, .modal-content, .form-control, .input-group-append {
-    background-color: #39393a !important;
+    background-color: #282828 !important;
+    border: none;
     border-color: #667777 !important;
 }
 
 .btn-outline-secondary {
-    color: #babaca;
-    border-color: #aaaada !important;
+border: none;}
+
+.btn {
+    background-color:  #087099;
+        color: #f0f0f0;
 }
 
 .form-control, .form-control:focus {
-    color: #bbbbfa;
+    color: #f0f0f0;
 }
 
 .form-control::placeholder {
