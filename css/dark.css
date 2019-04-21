@@ -9,16 +9,23 @@ html, body, .container {
 
 .card, .modal-content, .form-control, .input-group-append {
     background-color: #282828 !important;
-    border: none;
+    
     border-color: #667777 !important;
+}
+
+.card, .modal-content, .input-group-append {
+    border: none;
+}
+
+.form-control {
+    border-color: #3d3d3d !important;;
 }
 
 .btn-outline-secondary {
 border: none;}
 
 .btn {
-    background-color:  #087099;
-        color: #f0f0f0;
+    color: #f0f0f0;
 }
 
 .form-control, .form-control:focus {
@@ -29,3 +36,4 @@ border: none;}
     color: #848a8f;
     opacity: 1; /* Firefox */
 }
+
