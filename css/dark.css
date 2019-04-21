@@ -22,7 +22,8 @@ html, body, .container {
 }
 
 .btn-outline-secondary {
-border: none;}
+border: none;
+background-color: #1f1f1f; }
 
 .btn {
     color: #f0f0f0;
@@ -36,4 +37,3 @@ border: none;}
     color: #848a8f;
     opacity: 1; /* Firefox */
 }
-
