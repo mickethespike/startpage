@@ -1,153 +1,131 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Home</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="./css/dark.css" rel="stylesheet">
-    <link href="./css/slidertoggle.css" rel="stylesheet">
-    <script src="./js/handle_switches.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Home</title>
+
+	<link rel="stylesheet" href="./css/style.css" />
+	<link rel="stylesheet" href="./css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./css/basetheme.css" />
+	<link rel="stylesheet" href="./css/dark.css" />
+	<link rel="stylesheet" href="./css/slidertoggle.css" />
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<script src="./js/handle_state.js"></script>
+	<script src="./js/handle_switches.js"></script>
 </head>
 <body>
-    <button type="button" class="menu-btn fa fa-plus" data-toggle="modal" onclick="setModalMode('Add', 'addCard')" data-target="#editModal" tabindex="-1"></button>
-    <button type="button" class="menu-btn fa fa-cog" data-toggle="modal" data-target="#settingsModal" tabindex="-1"></button>
+	<button type="button" class="menu-btn fa fa-plus" data-toggle="modal" onclick="setModalMode('Add', 'addCard')" data-target="#editModal" tabindex="-1"></button>
+	<button type="button" class="menu-btn fa fa-cog" data-toggle="modal" data-target="#settingsModal" tabindex="-1"></button>
 
-    <div id="editModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Add Card</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body" id="settings-modal-body">
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" id="card_title">
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" rows="1" id="description"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="url">Url</label>
-                        <input type="text" class="form-control" id="url">
-                    </div>
-                    <div class="form-group">
-                        <label for="button_label">Button Label</label>
-                        <input type="text" class="form-control" id="button_label">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"></button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div id="editModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Add Card</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body" id="settings-modal-body">
+					<div class="form-group">
+						<label for="title">Title</label>
+						<input type="text" class="form-control" id="card_title">
+					</div>
+					<div class="form-group">
+						<label for="description">Description</label>
+						<textarea class="form-control" rows="1" id="description"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="button_url">Button Url</label>
+						<input type="text" class="form-control" id="button_url">
+					</div>
+					<div class="form-group">
+						<label for="button_label">Button Label</label>
+						<input type="text" class="form-control" id="button_label">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"></button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div id="settingsModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Settings</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="setting">
-                        <h5>Theme</h5>
-                        <label class="switch theme-switch">
-                            <input id="theme-input" type="checkbox" onclick="setTheme(this.checked)">
-                            <span class="slider round"></span>
-                            <span class="setting-desc" id="theme-state-desc"></span>
-                        </label>
-                    </div>
-                    <br />
-                    <div class="setting">
-                        <h5>Donation Button</h5>
-                        <label class="switch donation-switch">
-                            <input id="donation-input" type="checkbox" onclick="setDonationVisible(this.checked)" checked>
-                            <span class="slider round"></span>
-                            <span class="setting-desc" id="donation-state-desc"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div id="settingsModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Settings</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="setting">
+						<h5>Theme</h5>
+						<label class="switch theme-switch">
+							<input id="theme-input" type="checkbox" onclick="setTheme(this.checked)">
+							<span class="slider round"></span>
+							<span class="setting-desc" id="theme-state-desc"></span>
+						</label>
+					</div>
+					<br />
+					<div class="setting">
+						<h5>Donation Button</h5>
+						<label class="switch donation-switch">
+							<input id="donation-input" type="checkbox" onclick="setDonationVisible(this.checked)" checked>
+							<span class="slider round"></span>
+							<span class="setting-desc" id="donation-state-desc"></span>
+						</label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="container">
-        <div class="input-group mb-3" searchbase="https://duckduckgo.com/&q=">
-            <img class="searchEngineIcon" src="https://duckduckgo.com/favicon.ico" width="40" height="40" />
-            <input type="text" class="form-control" id="searchbar" placeholder="Search DuckDuckGo" aria-label="Search DuckDuckGo" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event)" autofocus>
-            <div class="input-group-append" style="background-color: white;" onclick="buttonQuerySite(this)">
-                <button class="btn btn-outline-secondary" tabIndex="-1" type="button">Search</button>
-            </div>
-        </div>
+	<div class="container">
+		<div class="input-group mb-3" searchbase="https://duckduckgo.com/&q=">
+			<img class="searchEngineIcon" src="https://duckduckgo.com/favicon.ico" width="40" height="40" />
+			<input type="text" class="form-control" id="searchbar" placeholder="Search DuckDuckGo" aria-label="Search DuckDuckGo" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event)" autofocus>
+			<div class="input-group-append" style="background-color: white;" onclick="buttonQuerySite(this)">
+				<button class="btn btn-outline-secondary" tabIndex="-1" type="button">Search</button>
+			</div>
+		</div>
 
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <img class="previewIcon" src="./img/youtube.png" width="24" height="24"/>
-                            YouTube
-                        </h5>
-                        <div class="input-group mb-3" searchbase="https://youtube.com/results?search_query=">
-                            <input type="text" class="form-control" id="searchyoutube" placeholder="Search YouTube" aria-label="Search YouTube" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event)">
-                            <div class="input-group-append" onclick="buttonQuerySite(this)">
-                                <button class="btn btn-outline-secondary" tabIndex="-1" type="button">Search</button>
-                            </div>
-                        </div>
-                        <p class="card-text">The biggest video sharing platform!</p>
-                        <a href="https://youtube.com" tabIndex="-1" class="btn btn-primary">Get me there!</a>
-                    </div>
-                </div>
-            </div>
+		<div class="row" id="primaryRow"></div>
 
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <img class="previewIcon" src="https://github.com/favicon.ico" width="24" height="24"/>
-                            GitHub
-                        </h5>
-                        <div class="input-group mb-3" searchbase="https://github.com/search?q=">
-                            <input type="text" class="form-control" id="searchgithub" placeholder="Search GitHub" aria-label="Search GitHub" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event)">
-                            <div class="input-group-append" onclick="buttonQuerySite(this)">
-                                <button class="btn btn-outline-secondary" tabIndex="-1" type="button">Search</button>
-                            </div>
-                        </div>
-                        <p class="card-text">The most awesome code sharing platform for lovers of open source.</p>
-                        <a href="https://github.com" tabindex="-1" class="btn btn-primary">Sounds awesome!</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<div class="row" id="userRow"></div>
+	</div>
 
-        <div class="row" id="secondaryRow">
-        </div>
-    </div>
+	<script src="./js/fade_helpers.js"></script>
+	<script src="./js/card_model.js"></script>
+	<script src="./js/card_helpers.js"></script>
+	<script src="./js/handle_view.js"></script>
 
-    <div id="coffee-btn" style="display: none; position: fixed; bottom: 10px; right: 5px;">
-        <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script>
-        <script type='text/javascript'>
-            kofiwidget2.init('Support my coffee addiction', '#337AB7', 'R6R5FE86');
-            kofiwidget2.draw();
-        </script>
-    </div>
-    <script src="./js/fade_helpers.js"></script>
-    <script src="./js/handle_search.js"></script>
-    <script src="./js/handle_cards.js"></script>
-    <script>
-        loadSettings();
-    </script>
+	<script>
+		loadSettings();
+		loadSavedState();
+	</script>
+
+	<script src="./js/handle_search.js"></script>
+	<script src="./js/handle_buttons.js"></script>
+
+	<div id="coffee-btn" style="display: none; position: fixed; bottom: 10px; right: 5px;">
+		<script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script>
+		<script type='text/javascript'>
+			if (getLocalBool(showDonationButtonTag)) {
+				setDonationVisible(true);
+			} else {
+				setDonationVisible(getLocalBool(showDonationButtonTag));
+			}
+
+			kofiwidget2.init('Support my coffee addiction', '#337AB7', 'R6R5FE86');
+			kofiwidget2.draw();
+		</script>
+	</div>
 </body>
 </html>

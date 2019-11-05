@@ -1,39 +1,26 @@
-html, body, .container {
-    background-color: #323232  !important;
-    color: #ffffff;
+html, body {
+	color: #ffffff;
+	background-color: #323232 !important;
 }
 
 .close {
-    color: #ffffff !important;
+	color: #ffffff !important;
 }
 
 .card, .modal-content, .form-control, .input-group-append {
-    background-color: #282828 !important;
-    
-    border-color: #667777 !important;
-}
-
-.card, .modal-content, .input-group-append {
-    border: none;
+	background-color: #282828 !important;
 }
 
 .form-control {
-    border-color: #3d3d3d !important;;
-}
-
-.btn-outline-secondary {
-border: none;
-background-color: #1f1f1f; }
-
-.btn {
-    color: #f0f0f0;
+	border-color: #3d3d3d !important;
 }
 
 .form-control, .form-control:focus {
-    color: #f0f0f0;
+	color: #f0f0f0;
 }
 
-.form-control::placeholder {
-    color: #848a8f;
-    opacity: 1; /* Firefox */
+.btn-outline-secondary {
+	color: lightgray;
+	border-color: darkslategray;
+	background-color: #1f1f1f;
 }
