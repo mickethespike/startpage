@@ -3,6 +3,7 @@
 const cardDataKey = 'data';
 let cardArray;
 let cardRow;
+let currentlyEditedCard;
 
 window.onload = () => {
     cardArray = loadCards(cardDataKey);
@@ -15,7 +16,7 @@ function getCardRow() {
 }
 
 function appendCard(data) {
-    const child = getCardDiv(data);
+    const child = createCardDiv(data);
     getCardRow().appendChild(child);
     fadeIn(child);
 }
@@ -61,21 +62,54 @@ function deleteCard(cardID) {
     }
 }
 
-function editCard(cardID) {
-  $('#editModal').modal();
-  setModalMode('Edit');
+function findCardData(cardID) {
+    for (let i = 0; i < cardArray.length; i++) {
+        if (cardArray[i].id === cardID) {
+            return cardArray[i];
+        }
+    }
+
+    return null;
 }
 
-function setModalMode(modeName) {
+function editCard(cardID) {
+    const cardData = findCardData(cardID);
+    console.log(cardID);
+    const title = document.getElementById('card_title').value;
+    cardData.title = title;
+    cardData.id = title.replace('.', '_').replace(' ', '_');
+    cardData.description = document.getElementById('description').value,
+    cardData.url = document.getElementById('url').value;
+    cardData.buttonLabel = document.getElementById('button_label').value;
+
+    getCardHTML(cardData);
+
+    saveCards();
+}
+
+function setModalMode(modeName, methodName) {
   const modal = $('#editModal')['0'];
   modal.querySelector('.modal-title').innerHTML = `${modeName} Card`;
   const btn = modal.querySelector('.modal-footer').querySelector('.btn');
   btn.innerHTML = modeName;
-  btn.setAttribute('onclick', `${modeName.toLowerCase()}Card()`);
+  btn.setAttribute('onclick', `${methodName}()`);
   console.log(modeName);
 }
 
-function getCardDiv(cardData) {
+function startEditingCard(cardID) {
+    $('#editModal').modal();
+    setModalMode('Edit', 'stopEditingCard');
+
+    currentlyEditedCard = cardID;
+}
+
+function stopEditingCard() {
+    editCard(currentlyEditedCard);
+
+    currentlyEditedCard = null;
+}
+
+function createCardDiv(cardData) {
     const div = document.createElement('node');
     div.className = 'col-sm-6';
     div.id = cardData.id;
@@ -91,13 +125,19 @@ function getCardDiv(cardData) {
         iconUrl += 'favicon.ico';
     }
 
-    div.innerHTML = `
+    div.innerHTML = getCardHTML(cardData);
+
+    return div;
+}
+
+function getCardHTML(cardData) {
+    return `
         <div class="card">
 	       	<div class="card-body">
 	       		<div class="dropdown">
 	       			<button type="button" class="dropdown-toggle card-settings fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
 	       			<div class="dropdown-menu">
-	       				<a class="dropdown-item" href="#" onclick="editCard('${cardData.id}')">Edit</a>
+	       				<a class="dropdown-item" href="#" onclick="startEditingCard('${cardData.id}')">Edit</a>
 	       				<a class="dropdown-item" href="#" onclick="deleteCard('${cardData.id}')">Delete</a>
 	       			</div>
 	       		</div>
@@ -109,5 +149,4 @@ function getCardDiv(cardData) {
 	       		<a href="${cardData.url}" class="btn btn-primary">${cardData.buttonLabel}</a>
 	       	</div>
 	    </div>`;
-    return div;
 }
