@@ -18,3 +18,7 @@ you can..
  - add cards
  - remove cards
  - change themes (light/dark)
+
+## soon-to-be features
+ - edit cards
+ - custom css themes
