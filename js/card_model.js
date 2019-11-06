@@ -19,10 +19,12 @@ class CardEditModel {
 	}
 }
 
-function generateCardHTML(cardData) {
-	let cardIconHtml = cardData.customIconUrl
-		? `<img class="previewIcon" src="${cardData.customIconUrl}" width="24" height="24" />`
-		: "";
+function generateCardIconHtml(url) {
+	return `<img class="previewIcon" src="${url}" width="24" height="24" />`;
+}
+
+function generateCardHtml(cardData) {
+	let cardIconHtml = cardData.customIconUrl ? generateCardHtml(cardData.customIconUrl) : "";
 
 	let cardSearchBox = "";
 	if (cardData.searchBase) {
@@ -47,9 +49,7 @@ function generateCardHTML(cardData) {
 			</div>
 
 			<h5 class="card-title">
-				<div class="card-icon">
-					${cardIconHtml}
-				</div>
+				<span class="card-icon">${cardIconHtml}</span>
 				<span>${cardData.title}</span>
 			</h5>
 

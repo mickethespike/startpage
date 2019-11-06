@@ -6,10 +6,15 @@ function appendCardData(row, cardData, fade) {
 	const node = document.createElement('node');
 	node.className = 'col-sm-6';
 	node.style = "opacity: 0;";
-	node.innerHTML = generateCardHTML(cardData);
+	node.innerHTML = generateCardHtml(cardData);
 
 	if (!cardData.customIconUrl) {
-		// prepare icon request with favicon_extract.js
+		sendFaviconRequest(cardData.buttonUrl).then((iconUrl) => {
+			if (iconUrl) {
+				const cardIconDiv = node.getElementsByClassName("card-icon")[0];
+				cardIconDiv.innerHTML = generateCardIconHtml(iconUrl);
+			}
+		}).catch();
 	}
 
 	row.appendChild(node);
@@ -57,7 +62,7 @@ function editCard(cardId) {
 	saveCards();
 
 	const node = findCardNodeById(cardId);
-	node.innerHTML = generateCardHTML(cardData);
+	node.innerHTML = generateCardHtml(cardData);
 }
 
 function setModalMode(modeName, methodName) {
