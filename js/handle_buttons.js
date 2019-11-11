@@ -15,7 +15,7 @@ function deleteCard(sender) {
 		saveCards();
 
 		const cardNode = findCardNodeById(cardId);
-		fadeOutAndRemove(cardNode);
+		fadeOutAndRemoveElement(cardNode);
 		return true;
 	}
 	return false;
@@ -37,6 +37,8 @@ function addCard() {
 		buttonUrl: document.getElementById('button_url').value,
 		buttonLabel: document.getElementById('button_label').value
 	};
+
+	validateCardData(cardData);
 
 	userCards.push(cardData);
 	saveCards();

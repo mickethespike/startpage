@@ -2,44 +2,54 @@
 
 let currentlyEditedCardId;
 
+/**
+ * Appends a new card to a row.
+ * @param {HTMLDivElement} row The card row.
+ * @param {object} cardData The card data.
+ * @param {boolean} fade Whether to fade in the card.
+ * @returns {HTMLElement} The card element.
+ */
 function appendCardData(row, cardData, fade) {
 	const node = document.createElement('node');
 	node.className = 'col-sm-6';
-	node.style = "opacity: 0;";
 	node.innerHTML = generateCardHtml(cardData);
 
 	updateCardIcon(cardData, node);
 	row.appendChild(node);
 
 	if (fade)
-		fadeIn(node);
-	else
-		node.style.opacity = 1;
+		fadeInElement(node);
+	
+	return node;
 }
 
-function updateCardIcon(cardData, node) {
-	const cardIconDiv = node.getElementsByClassName("card-icon")[0];
-	if (cardData.customIconUrl) {
-		cardIconDiv.innerHTML = generateCardIconHtml(cardData.customIconUrl);
-	}
-	else {
-		sendFaviconRequest(cardData.buttonUrl).then((iconUrl) => {
-			if (iconUrl)
-				cardIconDiv.innerHTML = generateCardIconHtml(iconUrl);
-		}).catch();
-	}
-}
-
+/**
+ * Appends a new card to the primary row.
+ * @param {object} cardData The card data.
+ * @param {boolean} fade Whether to fade in the card.
+ * @returns {HTMLElement} The card element.
+ */
 function appendPrimaryCardData(cardData, fade) {
 	const row = document.getElementById('primaryRow');
 	return appendCardData(row, cardData, fade);
 }
 
+/**
+ * Appends a new card to the user row.
+ * @param {object} cardData The card data.
+ * @param {boolean} fade Whether to fade in the card.
+ * @returns {HTMLElement} The card element.
+ */
 function appendUserCardData(cardData, fade) {
 	const row = document.getElementById('userRow');
 	return appendCardData(row, cardData, fade);
 }
 
+/**
+ * Finds a card node by it's ID.
+ * @param {Number} cardId The card ID.
+ * @returns {HTMLElement} The card node.
+ */
 function findCardNodeById(cardId) {
 	const container = document.getElementsByClassName("container")[0];
 	const rows = container.getElementsByClassName("row");
@@ -64,6 +74,7 @@ function editCard(cardId) {
 	cardData.buttonUrl = document.getElementById('button_url').value;
 	cardData.buttonLabel = document.getElementById('button_label').value;
 
+	validateCardData(cardData);
 	saveCards();
 
 	const node = findCardNodeById(cardId);

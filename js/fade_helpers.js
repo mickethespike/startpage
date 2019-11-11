@@ -1,26 +1,19 @@
-function fadeIn(element) {
-	let op = 0.01;  // initial opacity
-	const timer = setInterval(() => {
-		if (op >= 1) {
-			clearInterval(timer);
-			op = 1;
-		}
-
-		element.style.opacity = op;
-		op += 0.15;
-	}, 20);
+/**
+ * Fades in an HTML element with CSS animation.
+ * @param {HTMLElement} element The element to fade in.
+ */
+function fadeInElement(element) {
+	element.classList.add("fade-in");
 }
 
-function fadeOutAndRemove(element) {
-	let op = 1;  // initial opacity
-	const timer = setInterval(() => {
-		if (op <= 0) {
-			clearInterval(timer);
+/**
+ * Fades out an HTML element with CSS animation, then removes it.
+ * @param {HTMLElement} element The element to fade out and remove.
+ */
+function fadeOutAndRemoveElement(element) {
+	element.addEventListener("animationend", function (ev) {
+		if (ev.animationName === "fade-out")
 			element.remove();
-			return;
-		}
-
-		element.style.opacity = op;
-		op -= 0.1;
-	}, 20);
+	});
+	element.classList.add("fade-out");
 }

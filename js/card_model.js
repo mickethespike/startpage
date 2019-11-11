@@ -19,10 +19,48 @@ class CardEditModel {
 	}
 }
 
+function validateCardData(cardData) {
+	try {
+		if (cardData.buttonUrl)
+			cardData.buttonUrl = new URL(cardData.buttonUrl);
+	}
+	catch (e) {
+		console.warn("Failed to construct button URL from", '"' + cardData.buttonUrl + '"');
+		delete cardData.buttonUrl;
+		return false;
+	}
+	return true;
+}
+
+/**
+ * Updates the card's icon.
+ * This function exists as icons can be requested asynchrounsly after a card's HTML is created.
+ * @param {any} cardData The card data.
+ * @param {HTMLElement} node The card node to update.
+ */
+function updateCardIcon(cardData, node) {
+	const cardIconDiv = node.getElementsByClassName("card-icon")[0];
+	if (cardData.customIconUrl) {
+		cardIconDiv.innerHTML = generateCardIconHtml(cardData.customIconUrl);
+	}
+	else {
+		sendFaviconRequest(cardData.buttonUrl).then((iconUrl) => {
+			if (iconUrl)
+				cardIconDiv.innerHTML = generateCardIconHtml(iconUrl);
+		}).catch();
+	}
+}
+
 function generateCardIconHtml(url) {
 	return `<img class="previewIcon" src="${url}" width="24" height="24" />`;
 }
 
+/**
+ * Generates HTML for a card.
+ * This method does not reserve an <img> for the card icon, use "updateCardIcon" after card creation.
+ * @param {any} cardData The card data.
+ * @returns {string} The generated card HTML.
+ */
 function generateCardHtml(cardData) {
 	let cardSearchBox = "";
 	if (cardData.searchBase) {

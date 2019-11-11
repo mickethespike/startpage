@@ -16,7 +16,9 @@ function loadSavedCards() {
 		: [];
 
 	for (let i = 0; i < items.length; i++) {
-		appendUserCardData(items[i], true);
+		const cardData = items[i];
+		validateCardData(cardData);
+		appendUserCardData(cardData, true);
 	}
 	return items;
 }

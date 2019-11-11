@@ -1,12 +1,16 @@
 
 const iconCacheKey = "iconCache/";
 
+/**
+ * Requests an icon, caching it on success.
+ * @param {URL} siteUrl The site URL.
+ * @returns {string} The icon URL.
+ */
 async function sendFaviconRequest(siteUrl) {
-	if (!siteUrl)
+	if (!siteUrl || !(siteUrl instanceof URL))
 		return null;
 
-	const url = new URL(siteUrl);
-	const hostname = url.hostname;
+	const hostname = siteUrl.hostname;
 	const cachePath = iconCacheKey + hostname;
 	const cachedIcon = getLocalStorage().getItem(cachePath);
 	if (cachedIcon && cachedIcon.length > 0)
