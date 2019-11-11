@@ -8,21 +8,26 @@ function appendCardData(row, cardData, fade) {
 	node.style = "opacity: 0;";
 	node.innerHTML = generateCardHtml(cardData);
 
-	if (!cardData.customIconUrl) {
-		sendFaviconRequest(cardData.buttonUrl).then((iconUrl) => {
-			if (iconUrl) {
-				const cardIconDiv = node.getElementsByClassName("card-icon")[0];
-				cardIconDiv.innerHTML = generateCardIconHtml(iconUrl);
-			}
-		}).catch();
-	}
-
+	updateCardIcon(cardData, node);
 	row.appendChild(node);
 
 	if (fade)
 		fadeIn(node);
 	else
 		node.style.opacity = 1;
+}
+
+function updateCardIcon(cardData, node) {
+	const cardIconDiv = node.getElementsByClassName("card-icon")[0];
+	if (cardData.customIconUrl) {
+		cardIconDiv.innerHTML = generateCardIconHtml(cardData.customIconUrl);
+	}
+	else {
+		sendFaviconRequest(cardData.buttonUrl).then((iconUrl) => {
+			if (iconUrl)
+				cardIconDiv.innerHTML = generateCardIconHtml(iconUrl);
+		}).catch();
+	}
 }
 
 function appendPrimaryCardData(cardData, fade) {
@@ -63,6 +68,7 @@ function editCard(cardId) {
 
 	const node = findCardNodeById(cardId);
 	node.innerHTML = generateCardHtml(cardData);
+	updateCardIcon(cardData, node);
 }
 
 function setModalMode(modeName, methodName) {

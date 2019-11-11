@@ -24,8 +24,6 @@ function generateCardIconHtml(url) {
 }
 
 function generateCardHtml(cardData) {
-	let cardIconHtml = cardData.customIconUrl ? generateCardHtml(cardData.customIconUrl) : "";
-
 	let cardSearchBox = "";
 	if (cardData.searchBase) {
 		cardSearchBox = `
@@ -49,7 +47,7 @@ function generateCardHtml(cardData) {
 			</div>
 
 			<h5 class="card-title">
-				<span class="card-icon">${cardIconHtml}</span>
+				<span class="card-icon"></span>
 				<span>${cardData.title}</span>
 			</h5>
 
