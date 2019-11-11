@@ -1,28 +1,158 @@
 
-class CardEditModel {
-	get title() {
-		return this.titleSpan.innerHTML;
-	}
+const cardIdAttrName = "data-card-id";
 
-	get id() {
+const cardModalBody = document.getElementById("settings-modal-body");
+cardModalBody.setAttribute(cardIdAttrName, null);
+const currentlyEditedCardId = cardModalBody.getAttributeNode(cardIdAttrName);
 
-	}
+class CardData {
 
-	static fromHtmlElement(element) {
-		const model = new CardEditModel();
-		model.titleDiv = element.getElementsByClassName("card-title")[0];
-		model.iconDiv = model.titleDiv.getElementsByTagName("div")[0];
-		model.titleSpan = model.titleDiv.getElementsByTagName("span")[0];
+	// TODO: add search-related fields
 
-		//model.
-		return model;
+	constructor() {
+		this.id = "";
+		this.title = "";
+		this.description = "";
+		this.buttonUrl = "";
+		this.buttonLabel = "";
+
+		this.customIconUrl = "";
 	}
 }
 
+class CardElement {
+
+	static modalElement = CardElement.wrapModal();
+
+	/**
+	 * Constructs an empty card element.
+	 * @param {HTMLElement} rootElement The card root.
+	 * @param {DataProperty} id The ID node.
+	 * @param {DataProperty} title The title element.
+	 * @param {DataProperty} description The description element.
+	 * @param {DataProperty} buttonUrl The button URL element.
+	 * @param {DataProperty} buttonLabel The button label node.
+	 * @param {HTMLSpanElement} iconElement The icon element.
+	 */
+	constructor(
+		rootElement,
+		id,
+		title,
+		description,
+		buttonUrl,
+		buttonLabel,
+		iconElement) {
+
+		this.rootElement = rootElement;
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.buttonUrl = buttonUrl;
+		this.buttonLabel = buttonLabel;
+		this.iconElement = iconElement;
+	}
+
+	/**
+	 * Creates a card data object from a card element.
+	 * @returns {CardData} The card data.
+	 * */
+	toCardData() {
+		const data = new CardData();
+		data.id = this.id.get();
+		data.title = this.title.get();
+		data.description = this.description.get();
+		data.buttonUrl = this.buttonUrl.get();
+		data.buttonLabel = this.buttonLabel.get();
+		return data;
+	}
+
+	/**
+	 * Assigns card data to the card element.
+	 * Does not assign ID.
+	 * @param {CardData} cardData The card data.
+	 */
+	assignCardData(cardData) {
+		this.title.set(cardData.title);
+		this.description.set(cardData.description);
+		this.buttonUrl.set(cardData.buttonUrl);
+		this.buttonLabel.set(cardData.buttonLabel);
+	}
+
+	/**
+	 * Constructs the card element from an existing node.
+	 * @param {HTMLElement} node The card node.
+	 * @returns {CardElement} The card element.
+	 */
+	static wrapNode(node) {
+		const cardElement = node.getElementsByClassName("card")[0];
+		const headerElement = cardElement.getElementsByClassName("card-title")[0];
+
+		const cardIdAttr = cardElement.getAttributeNode(cardIdAttrName);
+		const titleSpan = headerElement.getElementsByTagName("span")[1];
+		const descriptionSpan = cardElement.getElementsByClassName("card-text")[0];
+		const button = cardElement.getElementsByClassName("btn btn-primary")[0];
+		const buttonUrl = button.getAttributeNode("href");
+		const iconSpan = headerElement.getElementsByTagName("span")[0];
+
+		return new CardElement(
+			node,
+			new DataProperty(cardIdAttr),
+			new DataProperty(titleSpan),
+			new DataProperty(descriptionSpan),
+			new DataProperty(buttonUrl),
+			new DataProperty(button),
+			iconSpan);
+	}
+
+	/**
+	 * Constructs the card element from data.
+	 * @param {CardData} cardData The card data.
+	 * @returns {CardElement} The card element.
+	 */
+	static fromData(cardData) {
+		const node = document.createElement("node");
+		node.classList.add("col-sm-6");
+		node.innerHTML = generateCardHtml(cardData);
+
+		return CardElement.wrapNode(node);
+	}
+
+	/**
+	 * Constructs the card element from the card modal.
+	 * @returns {CardElement} The card element.
+	 */
+	static wrapModal() {
+		const titleInput = document.getElementById("card_title");
+		const descriptionInput = document.getElementById("description");
+		const buttonUrlInput = document.getElementById("button_url");
+		const buttonLabelInput = document.getElementById("button_label");
+
+		return new CardElement(
+			null,
+			new DataProperty(currentlyEditedCardId),
+			new DataProperty(titleInput),
+			new DataProperty(descriptionInput),
+			new DataProperty(buttonUrlInput),
+			new DataProperty(buttonLabelInput),
+			null);
+	}
+}
+
+/**
+ * Validates card data. Possible fixes;
+ *  * adding a protocol to the button URL.
+ * @param {CardData} cardData The card data.
+ * @returns {boolean} Whether the card data was valid.
+ */
 function validateCardData(cardData) {
 	try {
-		if (cardData.buttonUrl)
+		if (cardData.buttonUrl) {
+			if (!cardData.buttonUrl.startsWith("https://") &&
+				!cardData.buttonUrl.startsWith("http://"))
+				cardData.buttonUrl = "https://" + cardData.buttonUrl;
+
 			cardData.buttonUrl = new URL(cardData.buttonUrl);
+		}
 	}
 	catch (e) {
 		console.warn("Failed to construct button URL from", '"' + cardData.buttonUrl + '"');
@@ -35,18 +165,17 @@ function validateCardData(cardData) {
 /**
  * Updates the card's icon.
  * This function exists as icons can be requested asynchrounsly after a card's HTML is created.
- * @param {any} cardData The card data.
- * @param {HTMLElement} node The card node to update.
+ * @param {CardData} cardData The card data.
+ * @param {CardElement} cardElement The card to update.
  */
-function updateCardIcon(cardData, node) {
-	const cardIconDiv = node.getElementsByClassName("card-icon")[0];
+function updateCardIcon(cardData, cardElement) {
 	if (cardData.customIconUrl) {
-		cardIconDiv.innerHTML = generateCardIconHtml(cardData.customIconUrl);
+		cardElement.iconElement.innerHTML = generateCardIconHtml(cardData.customIconUrl);
 	}
 	else {
 		sendFaviconRequest(cardData.buttonUrl).then((iconUrl) => {
 			if (iconUrl)
-				cardIconDiv.innerHTML = generateCardIconHtml(iconUrl);
+				cardElement.iconElement.innerHTML = generateCardIconHtml(iconUrl);
 		}).catch();
 	}
 }
@@ -73,8 +202,10 @@ function generateCardHtml(cardData) {
 		</div>`;
 	}
 
+	const buttonHref = cardData.buttonUrl ? cardData.buttonUrl : "";
+
 	return `
-	<div class="card" data-id=${cardData.id}>
+	<div class="card" ${cardIdAttrName}=${cardData.id}>
 		<div class="card-body">
 			<div class="dropdown">
 				<button type="button" class="dropdown-toggle card-settings fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
@@ -92,7 +223,7 @@ function generateCardHtml(cardData) {
 			${cardSearchBox}
 
 			<p class="card-text">${cardData.description}</p>
-			<a href="${cardData.buttonUrl}" class="btn btn-primary">${cardData.buttonLabel}</a>
+			<a href="${buttonHref}" class="btn btn-primary">${cardData.buttonLabel}</a>
 		</div>
 	</div>`;
 }
