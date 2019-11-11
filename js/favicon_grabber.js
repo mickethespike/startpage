@@ -21,7 +21,7 @@ async function sendFaviconRequest(siteUrl) {
 }
 
 async function callFaviconGrabber(hostname) {
-	const requestUrl = "http://favicongrabber.com/api/grab/" + hostname;
+	const requestUrl = "https://favicongrabber.com/api/grab/" + hostname;
 	const apiResponse = await fetch(requestUrl, { mode: "cors" });
 	const result = await apiResponse.json();
 
