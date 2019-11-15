@@ -146,7 +146,7 @@ const modalElementInstance = CardElement.wrapModal();
  */
 function validateCardData(cardData) {
 	try {
-		if (cardData.buttonUrl) {
+		if (cardData.buttonUrl && !(cardData.buttonUrl instanceof URL)) {
 			if (!cardData.buttonUrl.startsWith("https://") &&
 				!cardData.buttonUrl.startsWith("http://"))
 				cardData.buttonUrl = "https://" + cardData.buttonUrl;
