@@ -6,8 +6,9 @@ cardModalBody.setAttribute(cardIdAttrName, null);
 const currentlyEditedCardId = cardModalBody.getAttributeNode(cardIdAttrName);
 
 class CardData {
-
-	// TODO: add search-related fields
+	// TODO:
+	//  * add search-related fields like 'searchBase',
+	//  * add a 'customIconUrl' picker in the card modal    
 
 	constructor() {
 		this.id = "";
@@ -51,7 +52,7 @@ class CardElement {
 	}
 
 	/**
-	 * Creates a card data object from a card element.
+	 * Creates a card data object from this element's data.
 	 * @returns {CardData} The card data.
 	 * */
 	toCardData() {
@@ -136,6 +137,8 @@ class CardElement {
 	}
 }
 
+// instead of a static field on CardElement,
+// static fields are apparently not standardized yet
 const modalElementInstance = CardElement.wrapModal();
 
 /**
@@ -145,20 +148,22 @@ const modalElementInstance = CardElement.wrapModal();
  * @returns {boolean} Whether the card data was valid.
  */
 function validateCardData(cardData) {
-	try {
-		if (cardData.buttonUrl && !(cardData.buttonUrl instanceof URL)) {
-			if (!cardData.buttonUrl.startsWith("https://") &&
-				!cardData.buttonUrl.startsWith("http://"))
-				cardData.buttonUrl = "https://" + cardData.buttonUrl;
-
-			cardData.buttonUrl = new URL(cardData.buttonUrl);
-		}
-	}
-	catch (e) {
-		console.warn("Failed to construct button URL from", '"' + cardData.buttonUrl + '"');
-		delete cardData.buttonUrl;
-		return false;
-	}
+    try {
+    	if (typeof cardData.buttonUrl === "string") {
+    		if (!cardData.buttonUrl.startsWith("https://") &&
+    			!cardData.buttonUrl.startsWith("http://"))
+    			cardData.buttonUrl = "https://" + cardData.buttonUrl;
+    		cardData.buttonUrl = new URL(cardData.buttonUrl);
+    	} else if(cardData.buttonUrl && !(cardData.buttonUrl instanceof URL)) {
+    		throw new Error();
+    	}
+    }
+    catch (e) {
+    	console.warn("Validation of button URL failed:", cardData.buttonUrl, e);
+    	delete cardData.buttonUrl;
+    	return false;
+    }
+	// add more validation code here
 	return true;
 }
 
