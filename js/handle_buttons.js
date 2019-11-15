@@ -8,7 +8,7 @@ function startEditingCard(sender) {
 	const cardId = findCardIdByParent(sender).value;
 	currentlyEditedCardId.value = cardId;
 
-	const cardElement = CardElement.modalElement;
+	const cardElement = modalElementInstance;
 	const cardData = findCardDataById(cardId);
 	cardElement.assignCardData(cardData);
 
@@ -25,12 +25,12 @@ function startAddingCard() {
 
 	if (shouldClearModal) {
 		shouldClearModal = false;
-		CardElement.modalElement.assignCardData(new CardData());
+		modalElementInstance.assignCardData(new CardData());
 	}
 }
 
 function finishAddingCard() {
-	const cardData = CardElement.modalElement.toCardData();
+	const cardData = modalElementInstance.toCardData();
 	validateCardData(cardData);
 
 	userCards.push(cardData);

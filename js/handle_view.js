@@ -8,6 +8,7 @@
  * @returns {HTMLElement} The card element.
  */
 function appendCardData(row, cardData, fade) {
+	validateCardData(cardData);
 	const cardElement = CardElement.fromData(cardData);
 
 	updateCardIcon(cardData, cardElement);
