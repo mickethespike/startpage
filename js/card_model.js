@@ -22,8 +22,6 @@ class CardData {
 
 class CardElement {
 
-	static modalElement = CardElement.wrapModal();
-
 	/**
 	 * Constructs an empty card element.
 	 * @param {HTMLElement} rootElement The card root.
@@ -137,6 +135,8 @@ class CardElement {
 			null);
 	}
 }
+
+const modalElementInstance = CardElement.wrapModal();
 
 /**
  * Validates card data. Possible fixes;

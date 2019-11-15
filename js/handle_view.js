@@ -62,7 +62,7 @@ function findCardNodeById(cardId) {
 }
 
 function editCard(cardId) {
-	const modalElement = CardElement.modalElement;
+	const modalElement = modalElementInstance;
 	const modalData = modalElement.toCardData();
 
 	const cardNode = findCardNodeById(cardId);
