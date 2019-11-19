@@ -25,4 +25,4 @@ you can..
  
  ## thanks
  
- thanks to [TechPizza](https://github.com/TechnologicalPizza) for doing a lot (all) of the later work on the project and rewriting the entire codebase to be not-as-spaghetti. <3
+ thanks to [TechPizza](https://github.com/TechnologicalPizza) for doing a lot (all) of the later work on the project and rewriting the entire codebase to be not-as-spaghetti. ❤️ 
