@@ -61,3 +61,15 @@ function deleteCard(sender) {
 	}
 	return false;
 }
+
+buttonUrlInputElement.onchange = () => stylizeButtonUrlInputElement();
+buttonUrlInputElement.oninput = () => stylizeButtonUrlInputElement();
+
+function stylizeButtonUrlInputElement() {
+	const url = modalElementInstance.buttonUrl.get();
+
+	buttonUrlInputElement.style.color = null;
+	if (url && !validateButtonUrl(url, false)) {
+		buttonUrlInputElement.style.color = "red";
+	}
+}

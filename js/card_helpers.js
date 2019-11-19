@@ -1,7 +1,7 @@
 
 function createCardId(title) {
 	const salt = Math.round(Math.random() * 100000);
-	const safeTitle = title.replace(" ", "_");
+	const safeTitle = title ? title.replace(" ", "_") : "";
 	return safeTitle + "_" + salt;
 }
 
@@ -40,6 +40,11 @@ function findCardIdByParent(node) {
 	return node.getAttributeNode(cardIdAttrName);
 }
 
+function invokeDOMEvent(eventName, element) {
+	const event = new Event(eventName);
+	element.dispatchEvent(event);
+}
+
 class DataProperty {
 
 	/**
@@ -47,24 +52,31 @@ class DataProperty {
 	 * @param {Node} node The node.
 	 */
 	constructor(node) {
-		this._node = node;
-
+		this.node = node;
 		this._isInput =
-			this._node instanceof HTMLInputElement ||
-			this._node instanceof HTMLTextAreaElement;
+			this.node instanceof HTMLInputElement ||
+			this.node instanceof HTMLTextAreaElement;
+
+		this.onset = null;
 	}
 
 	get() {
 		if (this._isInput)
-			return this._node.value;
-		return this._node.textContent;
+			return this.node.value;
+		return this.node.textContent;
 	}
 
 	set(value) {
+		if (!value)
+			value = null;
+
 		if (this._isInput)
-			this._node.value = value;
+			this.node.value = value;
 		else
-			this._node.textContent = value;
+			this.node.textContent = value;
+
+		if (this.onset)
+			this.onset(this);
 	}
 
 	clear() {

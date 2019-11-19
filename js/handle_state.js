@@ -3,6 +3,7 @@ const cardDataKey = 'savedUserCards';
 
 let fakeLocalStorage;
 var userCards;
+var primaryCards = [];
 
 function loadSavedState() {
 	userCards = loadSavedCards();

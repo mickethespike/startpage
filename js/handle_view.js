@@ -28,7 +28,10 @@ function appendCardData(row, cardData, fade) {
  */
 function appendPrimaryCardData(cardData, fade) {
 	const row = document.getElementById('primaryRow');
-	return appendCardData(row, cardData, fade);
+	const element = appendCardData(row, cardData, fade);
+
+	primaryCards.push(cardData);
+	return element;
 }
 
 /**

@@ -5,6 +5,11 @@ const cardModalBody = document.getElementById("settings-modal-body");
 cardModalBody.setAttribute(cardIdAttrName, null);
 const currentlyEditedCardId = cardModalBody.getAttributeNode(cardIdAttrName);
 
+const titleInputElement = document.getElementById("card_title");
+const descriptionInputElement = document.getElementById("description");
+const buttonUrlInputElement = document.getElementById("button_url");
+const buttonLabelInputElement = document.getElementById("button_label");
+
 class CardData {
 	// TODO:
 	//  * add search-related fields like 'searchBase',
@@ -121,19 +126,17 @@ class CardElement {
 	 * @returns {CardElement} The card element.
 	 */
 	static wrapModal() {
-		const titleInput = document.getElementById("card_title");
-		const descriptionInput = document.getElementById("description");
-		const buttonUrlInput = document.getElementById("button_url");
-		const buttonLabelInput = document.getElementById("button_label");
-
-		return new CardElement(
+		const element = new CardElement(
 			null,
 			new DataProperty(currentlyEditedCardId),
-			new DataProperty(titleInput),
-			new DataProperty(descriptionInput),
-			new DataProperty(buttonUrlInput),
-			new DataProperty(buttonLabelInput),
+			new DataProperty(titleInputElement),
+			new DataProperty(descriptionInputElement),
+			new DataProperty(buttonUrlInputElement),
+			new DataProperty(buttonLabelInputElement),
 			null);
+
+		element.buttonUrl.onset = (e) => invokeDOMEvent("change", e.node);
+		return element;
 	}
 }
 
@@ -148,23 +151,38 @@ const modalElementInstance = CardElement.wrapModal();
  * @returns {boolean} Whether the card data was valid.
  */
 function validateCardData(cardData) {
-    try {
-    	if (typeof cardData.buttonUrl === "string") {
-    		if (!cardData.buttonUrl.startsWith("https://") &&
-    			!cardData.buttonUrl.startsWith("http://"))
-    			cardData.buttonUrl = "https://" + cardData.buttonUrl;
-    		cardData.buttonUrl = new URL(cardData.buttonUrl);
-    	} else if(cardData.buttonUrl && !(cardData.buttonUrl instanceof URL)) {
-    		throw new Error();
-    	}
-    }
-    catch (e) {
-    	console.warn("Validation of button URL failed:", cardData.buttonUrl, e);
-    	delete cardData.buttonUrl;
-    	return false;
-    }
+	let isValid = true;
+
+	const validatedButtonUrl = validateButtonUrl(cardData.buttonUrl, true);
+	if (!validatedButtonUrl) {
+		delete cardData.buttonUrl;
+		isValid = false;
+	}
+	else {
+		cardData.buttonUrl = validatedButtonUrl;
+	}
+
 	// add more validation code here
-	return true;
+	return isValid;
+}
+
+function validateButtonUrl(buttonUrl, logError) {
+	try {
+		if (typeof buttonUrl === "string") {
+			if (!buttonUrl.startsWith("https://") &&
+				!buttonUrl.startsWith("http://"))
+				buttonUrl = "https://" + buttonUrl;
+			buttonUrl = new URL(buttonUrl);
+		} else if (buttonUrl && !(buttonUrl instanceof URL)) {
+			throw new Error();
+		}
+	}
+	catch (e) {
+		if (logError)
+			console.warn("Validation of button URL failed:", buttonUrl, e);
+		return null;
+	}
+	return buttonUrl;
 }
 
 /**
