@@ -18,7 +18,11 @@ you can..
  - add cards
  - remove cards
  - change themes (light/dark)
-
-## soon-to-be features
  - edit cards
+ 
+## soon-to-be features
  - custom css themes
+ 
+ ## thanks
+ 
+ thanks to [TechPizza](https://github.com/TechnologicalPizza) for doing a lot (all) of the later work on the project and rewriting the entire codebase to be not-as-spaghetti. ❤️ 
