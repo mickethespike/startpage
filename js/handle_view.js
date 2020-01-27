@@ -82,20 +82,18 @@ function editCard(cardId) {
 }
 
 appendPrimaryCardData({
-	id: "YouTube_fixed",
+	id: "primary-YouTube",
 	title: "YouTube",
 	searchBase: "https://youtube.com/results?search_query=",
-	searchPlaceholder: "Search YouTube",
 	description: "The biggest video sharing platform!",
 	buttonUrl: "https://youtube.com",
 	buttonLabel: "Get me there!"
 }, false);
 
 appendPrimaryCardData({
-	id: "GitHub_fixed",
+	id: "primary-GitHub",
 	title: "GitHub",
 	searchBase: "https://github.com/search?q=",
-	searchPlaceholder: "Search GitHub",
 	description: "The most awesome code sharing platform for lovers of open source.",
 	buttonUrl: "https://github.com",
 	buttonLabel: "Sounds awesome!"

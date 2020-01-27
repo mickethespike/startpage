@@ -162,6 +162,12 @@ function validateCardData(cardData) {
 		cardData.buttonUrl = validatedButtonUrl;
 	}
 
+	if (!cardData.searchButtonLabel)
+		cardData.searchButtonLabel = "Search";
+
+	if (!cardData.searchPlaceholder)
+		cardData.searchPlaceholder = "Search " + cardData.title;
+
 	// add more validation code here
 	return isValid;
 }
@@ -218,9 +224,9 @@ function generateCardHtml(cardData) {
 	if (cardData.searchBase) {
 		cardSearchBox = `
 		<div class="input-group mb-3" searchbase="${cardData.searchBase}">
-			<input type="text" class="form-control" id="searchgithub" placeholder="${cardData.searchPlaceholder}" aria-label="${cardData.searchButtonLabel}" aria-describedby="basic-addon2" onkeypress="actionOnEnter(event)">
+			<input type="text" class="form-control" placeholder="${cardData.searchPlaceholder}" onkeypress="actionOnEnter(event)">
 			<div class="input-group-append" onclick="buttonQuerySite(this)">
-				<button class="btn btn-outline-secondary" tabIndex="-1" type="button">Search</button>
+				<button class="btn btn-outline-secondary" tabIndex="-1" type="button">${cardData.searchButtonLabel}</button>
 			</div>
 		</div>`;
 	}
