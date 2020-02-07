@@ -1,6 +1,5 @@
 
 const cardIdAttrName = "data-card-id";
-
 const cardModalBody = document.getElementById("settings-modal-body");
 cardModalBody.setAttribute(cardIdAttrName, null);
 const currentlyEditedCardId = cardModalBody.getAttributeNode(cardIdAttrName);
@@ -16,7 +15,7 @@ class CardData {
 	//  * add a 'customIconUrl' picker in the card modal    
 
 	constructor() {
-		this.id = "";
+		this.id = null;
 		this.title = "";
 		this.description = "";
 		this.buttonUrl = "";
@@ -62,7 +61,8 @@ class CardElement {
 	 * */
 	toCardData() {
 		const data = new CardData();
-		data.id = this.id.get();
+		if (this.id)
+			data.id = this.id.get();
 		data.title = this.title.get();
 		data.description = this.description.get();
 		data.buttonUrl = this.buttonUrl.get();
@@ -128,7 +128,7 @@ class CardElement {
 	static wrapModal() {
 		const element = new CardElement(
 			null,
-			new DataProperty(currentlyEditedCardId),
+			null,
 			new DataProperty(titleInputElement),
 			new DataProperty(descriptionInputElement),
 			new DataProperty(buttonUrlInputElement),
@@ -168,6 +168,9 @@ function validateCardData(cardData) {
 	if (!cardData.searchPlaceholder)
 		cardData.searchPlaceholder = "Search " + cardData.title;
 
+	if (!cardData.id || cardData.id === "null")
+		cardData.id = cardData.title + "_" + Math.random();
+
 	// add more validation code here
 	return isValid;
 }
@@ -175,6 +178,9 @@ function validateCardData(cardData) {
 function validateButtonUrl(buttonUrl, logError) {
 	try {
 		if (typeof buttonUrl === "string") {
+			if (buttonUrl.length == 0)
+				return null;
+
 			if (!buttonUrl.startsWith("https://") &&
 				!buttonUrl.startsWith("http://"))
 				buttonUrl = "https://" + buttonUrl;
