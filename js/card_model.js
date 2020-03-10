@@ -169,7 +169,7 @@ function validateCardData(cardData) {
 		cardData.searchPlaceholder = "Search " + cardData.title;
 
 	if (!cardData.id || cardData.id === "null")
-		cardData.id = cardData.title + "_" + Math.random();
+		cardData.id = cardData.title.replace(" ", "_") + "_" + Math.random();
 
 	// add more validation code here
 	return isValid;
